@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "520340654862",
+    "project_id": "mobi23-planner",
+    "storage_bucket": "mobi23-planner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520340654862:android:7c279c803be8045891655f",
+        "android_client_info": {
+          "package_name": "com.example.mobi23_planner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAo7_S5YB16KXY0KsenxPOiVl3mPuERwPs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
