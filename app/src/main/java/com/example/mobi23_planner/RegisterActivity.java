@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth auth;
@@ -52,7 +54,17 @@ public class RegisterActivity extends AppCompatActivity {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "Register successful", Toast.LENGTH_SHORT).show();
-                            //startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+
+                            FirebaseUser currentUser = auth.getCurrentUser();
+                            if(currentUser == null) {
+                                Toast.makeText(RegisterActivity.this, "Error - not logged in after register", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            currentUser.updateProfile(new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(name)
+                                    .build());
+
+                            startActivity(new Intent(RegisterActivity.this, TasksListActivity.class));
                             finish();
                         } else {
                             Toast.makeText(RegisterActivity.this, "Register failure", Toast.LENGTH_SHORT).show();

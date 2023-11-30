@@ -9,13 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mobi23_planner.data.DataManager;
+import com.example.mobi23_planner.data.DataManagerListener;
+import com.example.mobi23_planner.data.Task;
+
 import java.util.List;
 
-public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> {
+public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> implements DataManagerListener {
     private List<Task> taskList;
 
-    public TasksAdapter(List<Task> taskList) {
-        this.taskList = taskList;
+    public TasksAdapter() {
+        this.taskList = DataManager.getInstance().getTasks();
+        DataManager.getInstance().addListener(this);
     }
 
     @NonNull
@@ -24,7 +29,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View contactView = inflater.inflate(R.layout.recycler_view_item, parent, false);
+        View contactView = inflater.inflate(R.layout.task_list_item, parent, false);
 
         return new ViewHolder(contactView);
     }
@@ -43,6 +48,12 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return taskList.size();
+    }
+
+    @Override
+    public void tasksListChanged() {
+        taskList = DataManager.getInstance().getTasks();
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

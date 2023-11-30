@@ -1,8 +1,9 @@
-package com.example.mobi23_planner;
+package com.example.mobi23_planner.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Task {
+public class Task implements Serializable {
     private String title;
     private String description;
     private String date;
@@ -20,23 +21,6 @@ public class Task {
     }
 
     public Task() {
-        this.title = "";
-        this.description = "";
-        this.date = "";
-        this.time = "";
-        this.priority = "";
-        this.status = "";
-    }
-
-    // Test function to create a list of tasks
-    public static ArrayList<Task> createTaskList(int num) {
-        ArrayList<Task> tasks = new ArrayList<Task>();
-
-        for (int i = 1; i <= num; i++) {
-            tasks.add(new Task("Task " + i, "Description " + i, "Date " + i, "Time " + i, "Priority " + i, "Status " + i));
-        }
-
-        return tasks;
     }
 
     public String getTitle() {
