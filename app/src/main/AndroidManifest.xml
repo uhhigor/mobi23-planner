@@ -13,10 +13,10 @@
         android:theme="@style/Theme.Mobi23planner"
         tools:targetApi="31">
         <activity
-            android:name=".TasksListActivity"
+            android:name=".EditTaskActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".TasksListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,9 +25,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".RegisterActivity"
             android:exported="true">
-
         </activity>
     </application>
 

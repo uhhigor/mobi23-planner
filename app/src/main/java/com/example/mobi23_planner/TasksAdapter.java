@@ -1,5 +1,6 @@
 package com.example.mobi23_planner;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     private List<Task> taskList;
 
     public TasksAdapter() {
+        DataManager.getInstance().updateTasksList();
         this.taskList = DataManager.getInstance().getTasks();
         DataManager.getInstance().addListener(this);
     }
@@ -50,6 +52,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         return taskList.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void tasksListChanged() {
         taskList = DataManager.getInstance().getTasks();

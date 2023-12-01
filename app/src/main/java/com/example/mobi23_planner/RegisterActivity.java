@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mobi23_planner.data.DataManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -17,6 +18,8 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private EditText emailEditText, passwordEditText, nameEditText;
     private Button registerButton;
+
+    private Button goToLoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,14 @@ public class RegisterActivity extends AppCompatActivity {
         nameEditText = findViewById(R.id.etName);
         emailEditText = findViewById(R.id.etEmail);
         passwordEditText = findViewById(R.id.etPassword);
-        registerButton = findViewById(R.id.btnRegister);
+
+        registerButton = findViewById(R.id.btRegister);
+        goToLoginButton = findViewById(R.id.btGoToLogin);
+
+        goToLoginButton.setOnClickListener(v -> {
+            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+            finish();
+        });
 
         registerButton.setOnClickListener(v -> {
             String name = nameEditText.getText().toString();
@@ -60,9 +70,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "Error - not logged in after register", Toast.LENGTH_SHORT).show();
                                 return;
                             }
-                            currentUser.updateProfile(new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(name)
-                                    .build());
+                            DataManager.resetInstance();
+                            DataManager.getInstance().createUserDocument();
 
                             startActivity(new Intent(RegisterActivity.this, TasksListActivity.class));
                             finish();
