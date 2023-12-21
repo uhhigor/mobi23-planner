@@ -1,5 +1,12 @@
 package com.example.mobi23_planner;
 
+import java.util.Calendar;
+import java.util.Locale;
+import android.app.DatePickerDialog;
+
+import android.app.TimePickerDialog;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -21,9 +28,13 @@ public class EditTaskActivity extends AppCompatActivity {
         etTitle = findViewById(R.id.etTitle);
         etDescription = findViewById(R.id.etDescription);
         etDateStart = findViewById(R.id.etDateStart);
+        etDateStart.setOnClickListener(v -> showDatePickerDialog(etDateStart));
         etDateEnd = findViewById(R.id.etDateEnd);
+        etDateEnd.setOnClickListener(v -> showDatePickerDialog(etDateEnd));
         etTimeStart = findViewById(R.id.etTimeStart);
+        etTimeStart.setOnClickListener(v -> showTimePickerDialog(etTimeStart));
         etTimeEnd = findViewById(R.id.etTimeEnd);
+        etTimeEnd.setOnClickListener(v -> showTimePickerDialog(etTimeEnd));
 
         btSave = findViewById(R.id.btSave);
 
@@ -50,10 +61,57 @@ public class EditTaskActivity extends AppCompatActivity {
                     etTimeEnd.getText().toString(),
                     10, false
             );
+            if (isDateValid(etDateStart, etDateEnd, "End date must be after start date") ||
+                    isDateValid(etTimeStart, etTimeEnd, "End time must be after start time")) {
+                return;
+            }
             getIntent().putExtra("newTask", newTask);
             setResult(RESULT_OK, getIntent());
             finish();
         });
+    }
 
+    private boolean isDateValid(TextView start, TextView end, String message) {
+        if (end.getText().toString().compareTo(start.getText().toString()) < 0) {
+            end.setError("");
+            Toast.makeText(EditTaskActivity.this, message, Toast.LENGTH_LONG).show();
+            end.requestFocus();
+            return true;
+        }
+        return false;
+    }
+    private void showDatePickerDialog(EditText text) {
+        final Calendar c = Calendar.getInstance();
+
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                EditTaskActivity.this,
+                (view, yearOfTask, monthOfYear, dayOfMonth) -> {
+                    String selectedDate = String.format(Locale.getDefault(), "%02d-%02d-%d", dayOfMonth, monthOfYear + 1, yearOfTask);
+                    text.setText(selectedDate);
+                },
+                year, month, day);
+
+        datePickerDialog.show();
+    }
+
+    private void showTimePickerDialog(EditText text) {
+        final Calendar c = Calendar.getInstance();
+
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                EditTaskActivity.this,
+                (view, hourOfDay, minuteOfTask) -> {
+                    String selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minuteOfTask);
+                    text.setText(selectedTime);
+                },
+                hour, minute, true);
+
+        timePickerDialog.show();
     }
 }

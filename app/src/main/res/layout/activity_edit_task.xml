@@ -34,7 +34,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Task date start"
-            android:inputType="date" />
+            android:focusable="false"/>
+
 
         <EditText
             android:id="@+id/etDateEnd"
@@ -42,8 +43,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Task date end"
-            android:inputType="date"
-            android:selectAllOnFocus="false" />
+            android:focusable="false"/>
 
         <EditText
             android:id="@+id/etTimeStart"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Task time start"
-            android:inputType="time" />
+            android:focusable="false" />
 
         <EditText
             android:id="@+id/etTimeEnd"
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Task time end"
-            android:inputType="time" />
+            android:focusable="false" />
 
         <Button
             android:id="@+id/btSave"

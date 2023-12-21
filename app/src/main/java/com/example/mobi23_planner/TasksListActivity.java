@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -56,12 +57,11 @@ public class TasksListActivity extends AppCompatActivity {
             @Override
             public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
                 View childView = rv.findChildViewUnder(e.getX(), e.getY());
-                if(childView != null) {
+                if (e.getAction() == MotionEvent.ACTION_DOWN && childView != null) {
                     int position = rv.getChildAdapterPosition(childView);
                     Task task = dm.getTasks().get(position);
-                    Intent intent = new Intent(TasksListActivity.this, EditTaskActivity.class);
-                    intent.putExtra("oldTask", task);
-                    updateTaskActivity.launch(intent);
+
+                    showContextMenu(childView, task);
                 }
                 return false;
             }
@@ -69,6 +69,34 @@ public class TasksListActivity extends AppCompatActivity {
             public void onTouchEvent(RecyclerView rv, MotionEvent e) {}
             @Override
             public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {}
+
+            private void editTask(Task task) {
+                Intent intent = new Intent(TasksListActivity.this, EditTaskActivity.class);
+                intent.putExtra("oldTask", task);
+                updateTaskActivity.launch(intent);
+            }
+
+            private void deleteTask(Task task) {
+                dm.deleteTask(task.id);
+                Toast.makeText(TasksListActivity.this, "Task deleted", Toast.LENGTH_SHORT).show();
+            }
+
+            private void showContextMenu(View view, Task task) {
+                PopupMenu popupMenu = new PopupMenu(TasksListActivity.this, view);
+                popupMenu.inflate(R.menu.context_task_menu);
+                popupMenu.setOnMenuItemClickListener(item -> {
+                    if (item.getItemId() == R.id.menu_edit) {
+                        editTask(task);
+                        return true;
+                    } else if (item.getItemId() == R.id.menu_delete) {
+                        deleteTask(task);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+                popupMenu.show();
+            }
         });
 
         ActivityResultLauncher<Intent> addTaskActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),

@@ -37,7 +37,10 @@
                 android:visibility="visible"
                 tools:itemCount="10"
                 tools:listitem="@layout/task_list_item"
-                tools:visibility="visible">
+                tools:visibility="visible"
+                android:clickable="true"
+                android:focusable="true">
+
 
             </androidx.recyclerview.widget.RecyclerView>
 

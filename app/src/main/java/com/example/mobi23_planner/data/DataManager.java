@@ -127,4 +127,16 @@ public class DataManager {
             }
         });
     }
+
+    public void deleteTask(String id) {
+        tasksCollection.document(id).delete().addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                Log.d(TAG,"Task deleted successfully");
+                updateTasksList();
+            }
+            else {
+                Log.w(TAG,"Task deletion failure");
+            }
+        });
+    }
 }
