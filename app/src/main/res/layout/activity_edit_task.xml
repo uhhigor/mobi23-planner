@@ -36,6 +36,13 @@
             android:hint="Task date start"
             android:focusable="false"/>
 
+        <EditText
+                android:id="@+id/etTimeStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Task time start"
+                android:focusable="false" />
 
         <EditText
             android:id="@+id/etDateEnd"
@@ -46,20 +53,19 @@
             android:focusable="false"/>
 
         <EditText
-            android:id="@+id/etTimeStart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Task time start"
-            android:focusable="false" />
-
-        <EditText
             android:id="@+id/etTimeEnd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Task time end"
             android:focusable="false" />
+
+        <EditText
+            android:id="@+id/etGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Task group"/>
 
         <Button
             android:id="@+id/btSave"

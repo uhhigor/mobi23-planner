@@ -1,13 +1,19 @@
 package com.example.mobi23_planner;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -25,6 +31,8 @@ public class TasksListActivity extends AppCompatActivity {
 
     RecyclerView rvTasks;
     FloatingActionButton fabAddTask;
+    Spinner spinner;
+    List<Task> filteredTaskList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +51,31 @@ public class TasksListActivity extends AppCompatActivity {
         rvTasks.setLayoutManager(new LinearLayoutManager(this));
         rvTasks.setAdapter(adapter);
 
+        spinner = findViewById(R.id.sSpinner);
+        List<String> groupsList = dm.getGroups();
+        ArrayAdapter<String> adapterSpinner = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, groupsList);
+        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapterSpinner);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long l) {
+                String selectedGroup = parent.getItemAtPosition(pos).toString();
+
+                if (selectedGroup.equals("All")) {
+                    filteredTaskList = dm.getTasks();
+                } else {
+                    filteredTaskList = dm.getTasksByGroup(selectedGroup);
+                }
+                adapter.setTaskList(filteredTaskList);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+
         ActivityResultLauncher<Intent> updateTaskActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
@@ -53,6 +86,7 @@ public class TasksListActivity extends AppCompatActivity {
                         Toast.makeText(this, "Task updated", Toast.LENGTH_SHORT).show();
                     }
                 });
+
         rvTasks.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
             public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
@@ -115,6 +149,7 @@ public class TasksListActivity extends AppCompatActivity {
             addTaskActivity.launch(intent);
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

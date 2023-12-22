@@ -17,13 +17,11 @@ import java.util.List;
 public class DataManager {
     private static DataManager INSTANCE;
     private FirebaseFirestore db;
-
     private List<Task> tasksList = new ArrayList<>();
+    private List<String> groupsList = new ArrayList<>();;
     private User currentUser;
-
     private DocumentReference userDocument;
     private CollectionReference tasksCollection;
-
     private List<DataManagerListener> listeners = new ArrayList<>();
 
     public void addListener(DataManagerListener toAdd) {
@@ -73,6 +71,7 @@ public class DataManager {
                 for(QueryDocumentSnapshot document : task.getResult()) {
                     Task t = document.toObject(Task.class);
                     tasksList.add(t);
+                    getGroups();
                 }
                 notify_tasksListChanged();
             }
@@ -90,6 +89,17 @@ public class DataManager {
 
     public List<Task> getTasks() {
         return tasksList;
+    }
+
+    public List<String> getGroups() {
+        groupsList.clear();
+        groupsList.add("All");
+        for (Task task : tasksList) {
+            if (!groupsList.contains(task.getGroup())) {
+                groupsList.add(task.getGroup());
+            }
+        }
+        return groupsList;
     }
 
     public void createUserDocument() {
@@ -138,5 +148,15 @@ public class DataManager {
                 Log.w(TAG,"Task deletion failure");
             }
         });
+    }
+
+    public List<Task> getTasksByGroup(String group) {
+        List<Task> filteredTasks = new ArrayList<>();
+        for (Task task : tasksList) {
+            if (task.getGroup().equals(group)) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
     }
 }

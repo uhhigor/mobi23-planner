@@ -17,7 +17,7 @@ import com.example.mobi23_planner.data.Task;
 
 public class EditTaskActivity extends AppCompatActivity {
 
-    EditText etTitle, etDescription, etDateStart, etDateEnd, etTimeStart, etTimeEnd;
+    EditText etTitle, etDescription, etDateStart, etDateEnd, etTimeStart, etTimeEnd, etGroup;
     Button btSave;
 
     @Override
@@ -35,6 +35,7 @@ public class EditTaskActivity extends AppCompatActivity {
         etTimeStart.setOnClickListener(v -> showTimePickerDialog(etTimeStart));
         etTimeEnd = findViewById(R.id.etTimeEnd);
         etTimeEnd.setOnClickListener(v -> showTimePickerDialog(etTimeEnd));
+        etGroup = findViewById(R.id.etGroup);
 
         btSave = findViewById(R.id.btSave);
 
@@ -47,6 +48,7 @@ public class EditTaskActivity extends AppCompatActivity {
             etDateEnd.setText(oldTask.getDateEnd());
             etTimeStart.setText(oldTask.getTimeStart());
             etTimeEnd.setText(oldTask.getTimeEnd());
+            etGroup.setText(oldTask.getGroup());
 
             getIntent().putExtra("oldTaskId", oldTask.id);
         }
@@ -59,10 +61,10 @@ public class EditTaskActivity extends AppCompatActivity {
                     etDateEnd.getText().toString(),
                     etTimeStart.getText().toString(),
                     etTimeEnd.getText().toString(),
+                    etGroup.getText().toString(),
                     10, false
             );
-            if (isDateValid(etDateStart, etDateEnd, "End date must be after start date") ||
-                    isDateValid(etTimeStart, etTimeEnd, "End time must be after start time")) {
+            if (!isDateValid(etDateStart, etDateEnd, etTimeStart, etTimeEnd)) {
                 return;
             }
             getIntent().putExtra("newTask", newTask);
@@ -71,14 +73,22 @@ public class EditTaskActivity extends AppCompatActivity {
         });
     }
 
-    private boolean isDateValid(TextView start, TextView end, String message) {
-        if (end.getText().toString().compareTo(start.getText().toString()) < 0) {
-            end.setError("");
-            Toast.makeText(EditTaskActivity.this, message, Toast.LENGTH_LONG).show();
-            end.requestFocus();
-            return true;
+    private boolean isDateValid(TextView startDate, TextView endDate, TextView startTime, TextView endTime) {
+        if (endDate.getText().toString().compareTo(startDate.getText().toString()) < 0) {
+            endDate.setError("");
+            Toast.makeText(EditTaskActivity.this, "End date must be after start date", Toast.LENGTH_LONG).show();
+            endDate.requestFocus();
+            return false;
         }
-        return false;
+        if(endDate.getText().toString().compareTo(startDate.getText().toString()) == 0) {
+            if (endTime.getText().toString().compareTo(startTime.getText().toString()) < 0) {
+                endTime.setError("");
+                Toast.makeText(EditTaskActivity.this, "End time must be after start time", Toast.LENGTH_LONG).show();
+                endTime.requestFocus();
+                return false;
+            }
+        }
+        return true;
     }
     private void showDatePickerDialog(EditText text) {
         final Calendar c = Calendar.getInstance();

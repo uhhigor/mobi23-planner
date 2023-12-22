@@ -14,16 +14,18 @@ public class Task implements Serializable {
     private String dateEnd;
     private String timeStart;
     private String timeEnd;
+    private String group;
     private int priority;
     private Boolean status;
 
-    public Task(String title, String description, String dateStart, String dateEnd, String timeStart, String timeEnd, int priority, Boolean status) {
+    public Task(String title, String description, String dateStart, String dateEnd, String timeStart, String timeEnd, String group, int priority, Boolean status) {
         this.title = title;
         this.description = description;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
+        this.group = group;
         this.priority = priority;
         this.status = status;
     }
@@ -48,6 +50,8 @@ public class Task implements Serializable {
 
     public String getTimeEnd() { return timeEnd; }
 
+    public String getGroup() { return group; }
+
     public int getPriority() { return priority; }
 
     public Boolean getStatus() { return status; }
@@ -64,6 +68,8 @@ public class Task implements Serializable {
     public void setTimeStart(String timeStart) { this.timeStart = timeStart; }
 
     public void setTimeEnd(String timeEnd) { this.timeEnd = timeEnd; }
+
+    public void setGroup(String group) { this.group = group; }
 
     public void setPriority(int priority) { this.priority = priority; }
 
