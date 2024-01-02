@@ -40,21 +40,28 @@ public class LoginActivity extends AppCompatActivity {
             String email = emailEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
-            if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                if (!password.isEmpty()) {
-                    auth.signInWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(task -> {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                                    DataManager.resetInstance();
-                                    startActivity(new Intent(LoginActivity.this, TasksListActivity.class));
-                                    finish();
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Login failure", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+            if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches() || password.isEmpty()) {
+                if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    emailEditText.setError("Valid e-mail address is required");
+                    emailEditText.requestFocus();
+                } else {
+                    passwordEditText.setError("Password is required");
+                    passwordEditText.requestFocus();
                 }
+                return;
             }
+
+            auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                            DataManager.resetInstance();
+                            startActivity(new Intent(LoginActivity.this, TasksListActivity.class));
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Login failure", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
     }
 

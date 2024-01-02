@@ -15,15 +15,17 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:clickable="true"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/addtaskbutton"
             android:focusable="true"
+            android:tint="@color/light_blue"
+            app:backgroundTint="@color/light_blue"
+            app:rippleColor="@color/light_blue"
             app:srcCompat="@drawable/ic_task_add"
             app:useCompatPadding="true" />
 
@@ -37,20 +39,29 @@
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:background="#7C37FB" />
+<!--                android:id="@+id/sSpinner"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:layout_marginBottom="20dp" />-->
+<!--TODO::here comment-->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvTasks"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:visibility="visible"
                     tools:itemCount="10"
                     tools:listitem="@layout/task_list_item"
-                    tools:visibility="visible"
-                    android:clickable="true"
-                    android:focusable="true">
+                    tools:visibility="visible">
 
 
-            </androidx.recyclerview.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
+            </ScrollView>
 
         </LinearLayout>
 

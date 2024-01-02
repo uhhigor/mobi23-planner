@@ -1,17 +1,41 @@
 <resources>
-    <string name="app_name">mobi23-planner</string>
+    <string name="app_name">Pro Planner Plus</string>
+
     <string name="action_settings">Settings</string>
+    <string name="refresh">Refresh</string>
+    <string name="logout">Logout</string>
+
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 
     <string name="prompt_name">Name</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
 
-
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Register</string>
+
+    <string name="already_have_account">Already have an account?</string>
+
+    <string name="not_registered">Not registered yet?</string>
 
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_login">LoginActivity</string>
+
+    <string name="task_title">Task title</string>
+    <string name="task_description">Task description</string>
+    <string name="task_date_start">Task date start</string>
+    <string name="task_time_start">Task time start</string>
+    <string name="task_date_end">Task date end</string>
+    <string name="task_time_end">Task time end</string>
+    <string name="task_group">Task group</string>
+    <string name="save">Save</string>
+    <string name="todo">TODO</string>
+    <string name="task_image">Task image</string>
+    <string name="logo">Logo</string>
+    <string name="addtaskbutton">addTaskButton</string>
+    <string name="menubutton">menuButton</string>
+
 </resources>
