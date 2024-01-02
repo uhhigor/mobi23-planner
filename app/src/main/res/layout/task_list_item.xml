@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="70dp">
 
     <ImageView
         android:id="@+id/ivIcon"
@@ -13,31 +13,38 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@tools:sample/avatars"
+        android:contentDescription="@string/task_image"/>
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@tools:sample/full_names"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toTopOf="@+id/ivIcon"
-        app:layout_constraintStart_toEndOf="@+id/ivIcon"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvDescription" />
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvDescription"
+        app:layout_constraintStart_toEndOf="@+id/ivIcon"
+        app:layout_constraintTop_toTopOf="@+id/ivIcon"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="@tools:sample/full_names" />
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="285dp"
         android:layout_height="20dp"
-        tools:text="@tools:sample/lorem[4:10]"
-        app:layout_constraintBottom_toBottomOf="@+id/ivIcon"
-        app:layout_constraintStart_toEndOf="@+id/ivIcon"
         android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="8dp"
-        app:layout_constraintHorizontal_bias="0.050" />
+        android:layout_marginBottom="4dp"
+        app:autoSizeMaxTextSize="100sp"
+        app:autoSizeMinTextSize="16sp"
+        app:autoSizeStepGranularity="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/ivIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivIcon"
+        tools:text="@tools:sample/lorem[4:10]" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

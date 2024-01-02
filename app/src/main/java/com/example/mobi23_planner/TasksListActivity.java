@@ -1,11 +1,9 @@
 package com.example.mobi23_planner;
 
 import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -19,6 +17,8 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,6 +49,10 @@ public class TasksListActivity extends AppCompatActivity {
 
         rvTasks = findViewById(R.id.rvTasks);
         rvTasks.setLayoutManager(new LinearLayoutManager(this));
+        DividerItemDecoration divider = new DividerItemDecoration(rvTasks.getContext(), DividerItemDecoration.VERTICAL);
+        divider.setDrawable(ContextCompat.getDrawable(getBaseContext(), R.drawable.custom_divider));
+        rvTasks.addItemDecoration(divider);
+
         rvTasks.setAdapter(adapter);
 
         spinner = findViewById(R.id.sSpinner);
@@ -80,7 +84,7 @@ public class TasksListActivity extends AppCompatActivity {
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
-                        if(data == null) return;
+                        if (data == null) return;
 
                         dm.updateTask(data.getStringExtra("oldTaskId"), (Task) data.getSerializableExtra("newTask"));
                         Toast.makeText(this, "Task updated", Toast.LENGTH_SHORT).show();
@@ -99,10 +103,14 @@ public class TasksListActivity extends AppCompatActivity {
                 }
                 return false;
             }
+
             @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {}
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+            }
+
             @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {}
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+            }
 
             private void editTask(Task task) {
                 Intent intent = new Intent(TasksListActivity.this, EditTaskActivity.class);
@@ -137,7 +145,7 @@ public class TasksListActivity extends AppCompatActivity {
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
-                        if(data == null) return;
+                        if (data == null) return;
                         dm.addTask((Task) data.getSerializableExtra("newTask"));
                         Toast.makeText(this, "Task added", Toast.LENGTH_SHORT).show();
                     }
