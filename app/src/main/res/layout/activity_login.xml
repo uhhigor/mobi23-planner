@@ -15,14 +15,14 @@
         android:id="@+id/etEmail"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_marginTop="156dp"
+        android:layout_marginTop="248dp"
         android:autofillHints="emailAddress"
         android:hint="@string/prompt_email"
         android:imeOptions="actionDone"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,15 +31,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginTop="68dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="260dp"
         android:enabled="true"
         android:text="@string/action_sign_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword"
-        app:layout_constraintVertical_bias="0.027" />
+        app:layout_constraintVertical_bias="0.803" />
 
     <Button
         android:id="@+id/btGoToRegister"

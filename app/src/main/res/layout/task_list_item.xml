@@ -10,11 +10,11 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:contentDescription="@string/task_image"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars"
-        android:contentDescription="@string/task_image"/>
+        tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvName"
@@ -32,8 +32,8 @@
 
     <TextView
         android:id="@+id/tvDescription"
-        android:layout_width="285dp"
-        android:layout_height="20dp"
+        android:layout_width="272dp"
+        android:layout_height="22dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
