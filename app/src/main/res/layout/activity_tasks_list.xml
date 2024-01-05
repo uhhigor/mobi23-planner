@@ -35,8 +35,8 @@
             <Spinner
                 android:id="@+id/sSpinner"
                 android:layout_width="fill_parent"
-                android:layout_height="80dp"
-                android:background="#7358D1" />
+                android:layout_height="50dp"
+                android:background="#7C37FB" />
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvTasks"

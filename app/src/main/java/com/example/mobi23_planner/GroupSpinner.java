@@ -18,8 +18,8 @@ public class GroupSpinner implements DataManagerListener {
     }
 
     void setAdapter() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, DataManager.getInstance().getGroups());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, R.layout.spinner_list_item, DataManager.getInstance().getGroups());
+        adapter.setDropDownViewResource(R.layout.spinner_list_item);
         spinner.setAdapter(adapter);
     }
 
