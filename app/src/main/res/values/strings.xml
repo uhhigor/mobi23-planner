@@ -34,5 +34,6 @@
     <string name="save">Save</string>
     <string name="todo">TODO</string>
     <string name="task_image">Task image</string>
+    <string name="logo">Logo</string>
 
 </resources>

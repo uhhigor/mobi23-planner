@@ -1,6 +1,7 @@
 package com.example.mobi23_planner;
 
 import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -42,6 +44,12 @@ public class TasksListActivity extends AppCompatActivity {
             finish();
             return;
         }
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Pro Planner Plus");
+
+
+
         setContentView(R.layout.activity_tasks_list);
 
         DataManager dm = DataManager.getInstance();
