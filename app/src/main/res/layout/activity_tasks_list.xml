@@ -33,10 +33,10 @@
             android:orientation="vertical">
 
             <Spinner
-                    android:id="@+id/sSpinner"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp" />
+                android:id="@+id/sSpinner"
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="20dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvTasks"

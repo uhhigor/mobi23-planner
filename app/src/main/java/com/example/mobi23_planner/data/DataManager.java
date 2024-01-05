@@ -71,8 +71,8 @@ public class DataManager {
                 for(QueryDocumentSnapshot document : task.getResult()) {
                     Task t = document.toObject(Task.class);
                     tasksList.add(t);
-                    getGroups();
                 }
+                updateGroupsList();
                 notify_tasksListChanged();
             }
             else {
@@ -92,14 +92,17 @@ public class DataManager {
     }
 
     public List<String> getGroups() {
-        groupsList.clear();
+        return groupsList;
+    }
+
+    void updateGroupsList() {
+        groupsList = new ArrayList<>();
         groupsList.add("All");
         for (Task task : tasksList) {
             if (!groupsList.contains(task.getGroup())) {
                 groupsList.add(task.getGroup());
             }
         }
-        return groupsList;
     }
 
     public void createUserDocument() {

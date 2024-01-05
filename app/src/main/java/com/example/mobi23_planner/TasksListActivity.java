@@ -1,17 +1,13 @@
 package com.example.mobi23_planner;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -26,6 +22,9 @@ import com.example.mobi23_planner.data.DataManager;
 import com.example.mobi23_planner.data.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.List;
+import java.util.Objects;
 
 public class TasksListActivity extends AppCompatActivity {
 
@@ -42,21 +41,19 @@ public class TasksListActivity extends AppCompatActivity {
             finish();
             return;
         }
-        setContentView(R.layout.activity_tasks_list);
 
+        setContentView(R.layout.activity_tasks_list);
         DataManager dm = DataManager.getInstance();
+
         TasksAdapter adapter = new TasksAdapter();
+
 
         rvTasks = findViewById(R.id.rvTasks);
         rvTasks.setLayoutManager(new LinearLayoutManager(this));
         rvTasks.setAdapter(adapter);
 
         spinner = findViewById(R.id.sSpinner);
-        List<String> groupsList = dm.getGroups();
-        ArrayAdapter<String> adapterSpinner = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, groupsList);
-        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapterSpinner);
-
+        new GroupSpinner(this, spinner);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long l) {
@@ -82,7 +79,7 @@ public class TasksListActivity extends AppCompatActivity {
                         Intent data = result.getData();
                         if(data == null) return;
 
-                        dm.updateTask(data.getStringExtra("oldTaskId"), (Task) data.getSerializableExtra("newTask"));
+                        dm.updateTask(data.getStringExtra("oldTaskId"), (Task) Objects.requireNonNull(data.getSerializableExtra("newTask")));
                         Toast.makeText(this, "Task updated", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -138,7 +135,7 @@ public class TasksListActivity extends AppCompatActivity {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         if(data == null) return;
-                        dm.addTask((Task) data.getSerializableExtra("newTask"));
+                        dm.addTask((Task) Objects.requireNonNull(data.getSerializableExtra("newTask")));
                         Toast.makeText(this, "Task added", Toast.LENGTH_SHORT).show();
                     }
                 });
