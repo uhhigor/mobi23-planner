@@ -2,6 +2,7 @@ package com.example.mobi23_planner;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,14 +42,31 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Task task = taskList.get(position);
 
-        TextView nameTextView = holder.nameTextView;
+        if(position % 2 == 0)
+            holder.itemView.setBackgroundColor(Color.parseColor("#F8F8F8"));
+        else
+            holder.itemView.setBackgroundColor(Color.parseColor("#F2F2F2"));
+
+        CheckBox cbTaskDone = holder.cbTaskDone;
+        cbTaskDone.setChecked(task.isDone());
+
+        TextView nameTextView = holder.tvName;
         nameTextView.setText(task.getTitle());
 
-        TextView descriptionTextView = holder.descriptionTextView;
+        TextView descriptionTextView = holder.tvDescription;
         descriptionTextView.setText(task.getDescription());
 
-        CheckBox cbTaskDone = holder.checkBox;
-        cbTaskDone.setChecked(task.isDone());
+        TextView dateStartTextView = holder.tvDateStart;
+        dateStartTextView.setText(task.getDateStart());
+
+        TextView dateEndTextView = holder.tvDateEnd;
+        dateEndTextView.setText(task.getDateEnd());
+
+        TextView timeStartTextView = holder.tvTimeStart;
+        timeStartTextView.setText(task.getTimeStart());
+
+        TextView timeEndTextView = holder.tvTimeEnd;
+        timeEndTextView.setText(task.getTimeEnd());
 
         cbTaskDone.setOnClickListener(v -> {
             task.setDone(cbTaskDone.isChecked());
@@ -75,17 +93,23 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView nameTextView;
-        public TextView descriptionTextView;
-
-        public CheckBox checkBox;
+        public CheckBox cbTaskDone;
+        public TextView tvName;
+        public TextView tvDescription;
+        public TextView tvDateStart;
+        public TextView tvDateEnd;
+        public TextView tvTimeStart;
+        public TextView tvTimeEnd;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            nameTextView = itemView.findViewById(R.id.tvName);
-            descriptionTextView = itemView.findViewById(R.id.tvDescription);
-            checkBox = itemView.findViewById(R.id.cbTaskDone);
-
+            cbTaskDone = itemView.findViewById(R.id.cbTaskDone);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvDescription = itemView.findViewById(R.id.tvDescription);
+            tvDateStart = itemView.findViewById(R.id.tvDateStart);
+            tvDateEnd = itemView.findViewById(R.id.tvDateEnd);
+            tvTimeStart = itemView.findViewById(R.id.tvTimeStart);
+            tvTimeEnd = itemView.findViewById(R.id.tvTimeEnd);
         }
     }
 }

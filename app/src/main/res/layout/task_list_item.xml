@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
+    android:layout_height="wrap_content">
 
     <CheckBox
         android:id="@+id/cbTaskDone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="4dp"
         app:layout_constraintEnd_toStartOf="@+id/tvName"
@@ -22,22 +22,76 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-medium"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvDescription"
         app:layout_constraintStart_toEndOf="@+id/cbTaskDone"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/full_names" />
 
     <TextView
         android:id="@+id/tvDescription"
-        android:layout_width="285dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-medium"
+        android:textAlignment="viewStart"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/cbTaskDone"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="@+id/tvName"
         app:layout_constraintTop_toBottomOf="@+id/tvName"
-        tools:text="@tools:sample/lorem[4:10]" />
+        tools:text="@tools:sample/lorem[6]" />
+
+    <TextView
+        android:id="@+id/tvDateStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tvDescription"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+        tools:text="@tools:sample/date/ddmmyy" />
+
+    <TextView
+        android:id="@+id/tvTimeStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvDateStart"
+        app:layout_constraintTop_toBottomOf="@+id/tvDateStart"
+        tools:text="@tools:sample/date/hhmm" />
+
+    <TextView
+        android:id="@+id/tvTimeEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textAlignment="textEnd"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvDateEnd"
+        app:layout_constraintTop_toTopOf="@+id/tvTimeStart"
+        tools:text="@tools:sample/date/hhmm" />
+
+    <TextView
+        android:id="@+id/tvDateEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="56dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textAlignment="textEnd"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvDateStart"
+        tools:text="@tools:sample/date/ddmmyy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,8 +36,7 @@
                 android:id="@+id/sSpinner"
                 android:layout_width="fill_parent"
                 android:layout_height="80dp"
-                android:layout_marginBottom="20dp"
-                android:background="#6B4BDF" />
+                android:background="#7358D1" />
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvTasks"
