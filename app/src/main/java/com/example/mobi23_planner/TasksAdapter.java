@@ -2,10 +2,10 @@ package com.example.mobi23_planner;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,6 +46,14 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
 
         TextView descriptionTextView = holder.descriptionTextView;
         descriptionTextView.setText(task.getDescription());
+
+        CheckBox cbTaskDone = holder.checkBox;
+        cbTaskDone.setChecked(task.isDone());
+
+        cbTaskDone.setOnClickListener(v -> {
+            task.setDone(cbTaskDone.isChecked());
+            DataManager.getInstance().updateTask(task.getId(), task);
+        });
     }
 
     @Override
@@ -70,11 +78,14 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         public TextView nameTextView;
         public TextView descriptionTextView;
 
+        public CheckBox checkBox;
+
         public ViewHolder(View itemView) {
             super(itemView);
+            nameTextView = itemView.findViewById(R.id.tvName);
+            descriptionTextView = itemView.findViewById(R.id.tvDescription);
+            checkBox = itemView.findViewById(R.id.cbTaskDone);
 
-            nameTextView = (TextView) itemView.findViewById(R.id.tvName);
-            descriptionTextView = (TextView) itemView.findViewById(R.id.tvDescription);
         }
     }
 }

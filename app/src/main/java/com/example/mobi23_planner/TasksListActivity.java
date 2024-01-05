@@ -2,18 +2,21 @@ package com.example.mobi23_planner;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -86,18 +89,25 @@ public class TasksListActivity extends AppCompatActivity {
 
         rvTasks.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
                 View childView = rv.findChildViewUnder(e.getX(), e.getY());
                 if (e.getAction() == MotionEvent.ACTION_DOWN && childView != null) {
+                    CheckBox checkBox = childView.findViewById(R.id.cbTaskDone);
+                    Rect rect = new Rect();
+                    checkBox.getGlobalVisibleRect(rect);
+                    if (rect.contains((int) e.getRawX(), (int) e.getRawY())) {
+                        //checkbox clicked
+                        return false;
+                    }
                     int position = rv.getChildAdapterPosition(childView);
                     Task task = dm.getTasks().get(position);
-
                     showContextMenu(childView, task);
+                    return true;
                 }
                 return false;
             }
             @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {}
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {}
             @Override
             public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {}
 

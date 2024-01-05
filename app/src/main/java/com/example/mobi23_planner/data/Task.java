@@ -16,9 +16,9 @@ public class Task implements Serializable {
     private String timeEnd;
     private String group;
     private int priority;
-    private Boolean status;
+    private boolean done;
 
-    public Task(String title, String description, String dateStart, String dateEnd, String timeStart, String timeEnd, String group, int priority, Boolean status) {
+    public Task(String title, String description, String dateStart, String dateEnd, String timeStart, String timeEnd, String group, int priority, boolean done) {
         this.title = title;
         this.description = description;
         this.dateStart = dateStart;
@@ -27,11 +27,13 @@ public class Task implements Serializable {
         this.timeEnd = timeEnd;
         this.group = group;
         this.priority = priority;
-        this.status = status;
+        this.done = done;
     }
 
     public Task() {
     }
+
+    public String getId() { return id; }
 
 
     public String getTitle() {
@@ -52,26 +54,7 @@ public class Task implements Serializable {
 
     public String getGroup() { return group; }
 
-    public int getPriority() { return priority; }
+    public Boolean isDone() { return done; }
 
-    public Boolean getStatus() { return status; }
-
-
-    public void setTitle(String title) { this.title = title; }
-
-    public void setDescription(String description) { this.description = description; }
-
-    public void setDateStart(String dateStart) { this.dateStart = dateStart; }
-
-    public void setDateEnd(String dateEnd) { this.dateEnd = dateEnd; }
-
-    public void setTimeStart(String timeStart) { this.timeStart = timeStart; }
-
-    public void setTimeEnd(String timeEnd) { this.timeEnd = timeEnd; }
-
-    public void setGroup(String group) { this.group = group; }
-
-    public void setPriority(int priority) { this.priority = priority; }
-
-    public void setStatus(Boolean status) { this.status = status; }
+    public void setDone(Boolean done) { this.done = done; }
 }
