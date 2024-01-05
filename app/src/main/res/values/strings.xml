@@ -35,5 +35,7 @@
     <string name="todo">TODO</string>
     <string name="task_image">Task image</string>
     <string name="logo">Logo</string>
+    <string name="addtaskbutton">addTaskButton</string>
+    <string name="menubutton">menuButton</string>
 
 </resources>

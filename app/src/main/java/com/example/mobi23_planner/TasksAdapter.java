@@ -2,10 +2,10 @@ package com.example.mobi23_planner;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -70,11 +70,15 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         public TextView nameTextView;
         public TextView descriptionTextView;
 
+        public ImageView menuButton;
+
         public ViewHolder(View itemView) {
             super(itemView);
 
-            nameTextView = (TextView) itemView.findViewById(R.id.tvName);
-            descriptionTextView = (TextView) itemView.findViewById(R.id.tvDescription);
+            nameTextView =  itemView.findViewById(R.id.tvName);
+            descriptionTextView = itemView.findViewById(R.id.tvDescription);
+            menuButton = itemView.findViewById(R.id.menuButton);
+
         }
     }
 }
