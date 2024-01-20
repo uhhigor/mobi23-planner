@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -102,8 +101,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         public TextView tvTimeStart;
         public TextView tvTimeEnd;
 
-        public ImageView menuButton;
-
         public ViewHolder(View itemView) {
             super(itemView);
             cbTaskDone = itemView.findViewById(R.id.cbTaskDone);
@@ -113,11 +110,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
             tvDateEnd = itemView.findViewById(R.id.tvDateEnd);
             tvTimeStart = itemView.findViewById(R.id.tvTimeStart);
             tvTimeEnd = itemView.findViewById(R.id.tvTimeEnd);
-
-//            nameTextView =  itemView.findViewById(R.id.tvName);
-//            descriptionTextView = itemView.findViewById(R.id.tvDescription);
-//            menuButton = itemView.findViewById(R.id.menuButton);
-
         }
     }
 }
