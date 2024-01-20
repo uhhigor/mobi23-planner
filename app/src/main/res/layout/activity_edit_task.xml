@@ -15,100 +15,100 @@
         android:hint="@string/task_title"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/etDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/etDescription"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/etDescription"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.737" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
         android:id="@+id/etDescription"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="36dp"
         android:autofillHints="taskDescription"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/task_description"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/etDateStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/etDateStart"
+        app:layout_constraintStart_toStartOf="@+id/etDateStart"
+        app:layout_constraintTop_toBottomOf="@+id/etTitle"
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
         android:id="@+id/etDateStart"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="44dp"
         android:autofillHints="date"
         android:ems="10"
         android:focusable="false"
         android:hint="@string/task_date_start"
         android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/etTimeStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/etTimeStart"
+        app:layout_constraintStart_toStartOf="@+id/etTimeStart"
+        app:layout_constraintTop_toBottomOf="@+id/etDescription"
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
         android:id="@+id/etTimeStart"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="44dp"
         android:autofillHints="time"
         android:ems="10"
         android:focusable="false"
         android:hint="@string/task_time_start"
         android:inputType="time"
         app:layout_constraintBottom_toTopOf="@+id/etDateEnd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/etDateEnd"
+        app:layout_constraintStart_toStartOf="@+id/etDateEnd"
+        app:layout_constraintTop_toBottomOf="@+id/etDateStart"
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
         android:id="@+id/etDateEnd"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="44dp"
         android:autofillHints="date"
         android:ems="10"
         android:focusable="false"
         android:hint="@string/task_date_end"
         android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/etTimeEnd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/etTimeEnd"
+        app:layout_constraintStart_toStartOf="@+id/etTimeEnd"
+        app:layout_constraintTop_toBottomOf="@+id/etTimeStart"
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
         android:id="@+id/etTimeEnd"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="40dp"
         android:autofillHints="time"
         android:ems="10"
         android:focusable="false"
         android:hint="@string/task_time_end"
         android:inputType="time"
         app:layout_constraintBottom_toTopOf="@+id/etGroup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/etGroup"
+        app:layout_constraintStart_toStartOf="@+id/etGroup"
+        app:layout_constraintTop_toBottomOf="@+id/etDateEnd"
+        app:layout_constraintVertical_bias="0.5" />
 
     <EditText
         android:id="@+id/etGroup"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="120dp"
         android:autofillHints="taskGroup"
         android:ems="10"
         android:hint="@string/task_group"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/btSave"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etTimeEnd"
+        app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/btSave"

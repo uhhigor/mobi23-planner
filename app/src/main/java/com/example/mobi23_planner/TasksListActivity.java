@@ -19,8 +19,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,9 +59,6 @@ public class TasksListActivity extends AppCompatActivity {
 
         rvTasks = findViewById(R.id.rvTasks);
         rvTasks.setLayoutManager(new LinearLayoutManager(this));
-        DividerItemDecoration divider = new DividerItemDecoration(rvTasks.getContext(), DividerItemDecoration.VERTICAL);
-        divider.setDrawable(ContextCompat.getDrawable(getBaseContext(), R.drawable.custom_divider));
-        rvTasks.addItemDecoration(divider);
 
         rvTasks.setAdapter(adapter);
 
