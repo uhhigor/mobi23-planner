@@ -25,7 +25,6 @@ public class EditTaskActivity extends AppCompatActivity {
         etTitle = findViewById(R.id.etTitle);
         etDescription = findViewById(R.id.etDescription);
         etStepGoal = findViewById(R.id.etStepGoal);
-        etStepGoal.setOnClickListener(v -> showDatePickerDialog(etStepGoal));
         etDateEnd = findViewById(R.id.etDateEnd);
         etDateEnd.setOnClickListener(v -> showDatePickerDialog(etDateEnd));
         etStepLengthMinutes = findViewById(R.id.etStepLengthMinutes);

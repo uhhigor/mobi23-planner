@@ -37,5 +37,6 @@
     <string name="logo">Logo</string>
     <string name="addtaskbutton">addTaskButton</string>
     <string name="menubutton">menuButton</string>
+    <string name="increase_steps_button_description">Increase steps for task</string>
 
 </resources>

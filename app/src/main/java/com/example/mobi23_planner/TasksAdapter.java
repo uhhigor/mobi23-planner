@@ -6,8 +6,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,31 +47,22 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         else
             holder.itemView.setBackgroundColor(Color.parseColor("#F2F2F2"));
 
-        CheckBox cbTaskDone = holder.cbTaskDone;
-        cbTaskDone.setChecked(task.isDone());
-
         TextView nameTextView = holder.tvName;
         nameTextView.setText(task.getTitle());
 
         TextView descriptionTextView = holder.tvDescription;
         descriptionTextView.setText(task.getDescription());
 
-        TextView dateStartTextView = holder.tvDateStart;
-        dateStartTextView.setText(task.getDateStart());
-
         TextView dateEndTextView = holder.tvDateEnd;
         dateEndTextView.setText(task.getDateEnd());
 
-        TextView timeStartTextView = holder.tvTimeStart;
-        timeStartTextView.setText(task.getTimeStart());
+        ImageButton btTaskAction = holder.btTaskAction;
 
-        TextView timeEndTextView = holder.tvTimeEnd;
-        timeEndTextView.setText(task.getTimeEnd());
-
-        cbTaskDone.setOnClickListener(v -> {
-            task.setDone(cbTaskDone.isChecked());
-            DataManager.getInstance().updateTask(task.getId(), task);
-        });
+        if (task.isDone()) {
+            btTaskAction.setImageResource(R.drawable.ic_task_done);
+        } else {
+            btTaskAction.setImageResource(R.drawable.ic_task_increment);
+        }
     }
 
     @Override
@@ -94,30 +84,24 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public CheckBox cbTaskDone;
         public TextView tvName;
         public TextView tvDescription;
-        public TextView tvDateStart;
         public TextView tvDateEnd;
-        public TextView tvTimeStart;
-        public TextView tvTimeEnd;
 
-        public ImageView menuButton;
+        public ImageButton btTaskAction;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            cbTaskDone = itemView.findViewById(R.id.cbTaskDone);
             tvName = itemView.findViewById(R.id.tvName);
             tvDescription = itemView.findViewById(R.id.tvDescription);
-            tvDateStart = itemView.findViewById(R.id.tvDateStart);
             tvDateEnd = itemView.findViewById(R.id.tvDateEnd);
-            tvTimeStart = itemView.findViewById(R.id.tvTimeStart);
-            tvTimeEnd = itemView.findViewById(R.id.tvTimeEnd);
+            btTaskAction = itemView.findViewById(R.id.btTaskAction);
 
-//            nameTextView =  itemView.findViewById(R.id.tvName);
-//            descriptionTextView = itemView.findViewById(R.id.tvDescription);
-//            menuButton = itemView.findViewById(R.id.menuButton);
-
+            btTaskAction.setOnClickListener(v -> {
+                Task task = DataManager.getInstance().getTasks().get(getAdapterPosition());
+                task.taskAction();
+                DataManager.getInstance().updateTask(task.getId(), task);
+            });
         }
     }
 }

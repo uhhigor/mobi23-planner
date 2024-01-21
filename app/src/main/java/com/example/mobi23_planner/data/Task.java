@@ -51,10 +51,6 @@ public class Task implements Serializable {
 
     public int getStepsDone() { return stepsDone; }
 
-    public int getTimeSpent() { return stepsDone * stepLengthMinutes; }
-
-    public int getWholeTime() { return stepGoal * stepLengthMinutes; }
-
     public String getGroup() { return group; }
 
     public Boolean isDone() { return done; }
@@ -65,6 +61,15 @@ public class Task implements Serializable {
         this.stepsDone++;
         if (this.stepsDone >= this.stepGoal) {
             setDone(true);
+        }
+    }
+
+    public void taskAction() {
+        if (isDone()) {
+            setDone(false);
+            stepsDone = 0;
+        } else {
+            incrementStepsDone();
         }
     }
 }
