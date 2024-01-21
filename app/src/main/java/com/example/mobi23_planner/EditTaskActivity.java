@@ -1,23 +1,20 @@
 package com.example.mobi23_planner;
 
-import java.util.Calendar;
-import java.util.Locale;
 import android.app.DatePickerDialog;
-
-import android.app.TimePickerDialog;
-import android.widget.TextView;
-import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.mobi23_planner.data.Task;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 public class EditTaskActivity extends AppCompatActivity {
 
-    EditText etTitle, etDescription, etDateStart, etDateEnd, etTimeStart, etTimeEnd, etGroup;
+    EditText etTitle, etDescription, etDateEnd, etStepGoal, etStepLengthMinutes, etGroup;
     Button btSave;
 
     @Override
@@ -27,14 +24,11 @@ public class EditTaskActivity extends AppCompatActivity {
 
         etTitle = findViewById(R.id.etTitle);
         etDescription = findViewById(R.id.etDescription);
-        etDateStart = findViewById(R.id.etDateStart);
-        etDateStart.setOnClickListener(v -> showDatePickerDialog(etDateStart));
+        etStepGoal = findViewById(R.id.etStepGoal);
+        etStepGoal.setOnClickListener(v -> showDatePickerDialog(etStepGoal));
         etDateEnd = findViewById(R.id.etDateEnd);
         etDateEnd.setOnClickListener(v -> showDatePickerDialog(etDateEnd));
-        etTimeStart = findViewById(R.id.etTimeStart);
-        etTimeStart.setOnClickListener(v -> showTimePickerDialog(etTimeStart));
-        etTimeEnd = findViewById(R.id.etTimeEnd);
-        etTimeEnd.setOnClickListener(v -> showTimePickerDialog(etTimeEnd));
+        etStepLengthMinutes = findViewById(R.id.etStepLengthMinutes);
         etGroup = findViewById(R.id.etGroup);
 
         btSave = findViewById(R.id.btSave);
@@ -44,10 +38,9 @@ public class EditTaskActivity extends AppCompatActivity {
         if(oldTask != null) {
             etTitle.setText(oldTask.getTitle());
             etDescription.setText(oldTask.getDescription());
-            etDateStart.setText(oldTask.getDateStart());
+            etStepGoal.setText(oldTask.getStepGoal());
             etDateEnd.setText(oldTask.getDateEnd());
-            etTimeStart.setText(oldTask.getTimeStart());
-            etTimeEnd.setText(oldTask.getTimeEnd());
+            etStepLengthMinutes.setText(oldTask.getStepLengthMinutes());
             etGroup.setText(oldTask.getGroup());
 
             getIntent().putExtra("oldTaskId", oldTask.id);
@@ -57,38 +50,16 @@ public class EditTaskActivity extends AppCompatActivity {
             Task newTask = new Task(
                     etTitle.getText().toString(),
                     etDescription.getText().toString(),
-                    etDateStart.getText().toString(),
                     etDateEnd.getText().toString(),
-                    etTimeStart.getText().toString(),
-                    etTimeEnd.getText().toString(),
+                    Integer.parseInt(etStepGoal.getText().toString()),
+                    Integer.parseInt(etStepLengthMinutes.getText().toString()),
                     etGroup.getText().toString(),
-                    10, false
+                    false
             );
-            if (!isDateValid(etDateStart, etDateEnd, etTimeStart, etTimeEnd)) {
-                return;
-            }
             getIntent().putExtra("newTask", newTask);
             setResult(RESULT_OK, getIntent());
             finish();
         });
-    }
-
-    private boolean isDateValid(TextView startDate, TextView endDate, TextView startTime, TextView endTime) {
-        if (endDate.getText().toString().compareTo(startDate.getText().toString()) < 0) {
-            endDate.setError("");
-            Toast.makeText(EditTaskActivity.this, "End date must be after start date", Toast.LENGTH_LONG).show();
-            endDate.requestFocus();
-            return false;
-        }
-        if(endDate.getText().toString().compareTo(startDate.getText().toString()) == 0) {
-            if (endTime.getText().toString().compareTo(startTime.getText().toString()) < 0) {
-                endTime.setError("");
-                Toast.makeText(EditTaskActivity.this, "End time must be after start time", Toast.LENGTH_LONG).show();
-                endTime.requestFocus();
-                return false;
-            }
-        }
-        return true;
     }
     private void showDatePickerDialog(EditText text) {
         final Calendar c = Calendar.getInstance();
@@ -106,22 +77,5 @@ public class EditTaskActivity extends AppCompatActivity {
                 year, month, day);
 
         datePickerDialog.show();
-    }
-
-    private void showTimePickerDialog(EditText text) {
-        final Calendar c = Calendar.getInstance();
-
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int minute = c.get(Calendar.MINUTE);
-
-        TimePickerDialog timePickerDialog = new TimePickerDialog(
-                EditTaskActivity.this,
-                (view, hourOfDay, minuteOfTask) -> {
-                    String selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minuteOfTask);
-                    text.setText(selectedTime);
-                },
-                hour, minute, true);
-
-        timePickerDialog.show();
     }
 }

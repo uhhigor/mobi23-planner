@@ -26,8 +26,8 @@
 
     <string name="task_title">Task title</string>
     <string name="task_description">Task description</string>
-    <string name="task_date_start">Task date start</string>
-    <string name="task_time_start">Task time start</string>
+    <string name="step_goal">Step goal</string>
+    <string name="step_length">Step length</string>
     <string name="task_date_end">Task date end</string>
     <string name="task_time_end">Task time end</string>
     <string name="task_group">Task group</string>

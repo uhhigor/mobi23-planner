@@ -30,40 +30,41 @@
         android:gravity="start|top"
         android:hint="@string/task_description"
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/etDateStart"
-        app:layout_constraintEnd_toEndOf="@+id/etDateStart"
-        app:layout_constraintStart_toStartOf="@+id/etDateStart"
+        app:layout_constraintBottom_toTopOf="@+id/etStepGoal"
+        app:layout_constraintEnd_toEndOf="@+id/etStepGoal"
+        app:layout_constraintStart_toStartOf="@+id/etStepGoal"
         app:layout_constraintTop_toBottomOf="@+id/etTitle"
         app:layout_constraintVertical_bias="0.5" />
 
     <EditText
-        android:id="@+id/etDateStart"
+        android:id="@+id/etStepGoal"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:autofillHints="date"
         android:ems="10"
         android:focusable="false"
-        android:hint="@string/task_date_start"
-        android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/etTimeStart"
-        app:layout_constraintEnd_toEndOf="@+id/etTimeStart"
-        app:layout_constraintStart_toStartOf="@+id/etTimeStart"
+        android:hint="@string/step_goal"
+        android:inputType="number|numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/etStepLengthMinutes"
+        app:layout_constraintEnd_toEndOf="@+id/etStepLengthMinutes"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/etStepLengthMinutes"
         app:layout_constraintTop_toBottomOf="@+id/etDescription"
         app:layout_constraintVertical_bias="0.5" />
 
     <EditText
-        android:id="@+id/etTimeStart"
+        android:id="@+id/etStepLengthMinutes"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:autofillHints="time"
         android:ems="10"
         android:focusable="false"
-        android:hint="@string/task_time_start"
-        android:inputType="time"
+        android:hint="@string/step_length"
+        android:inputType="number|numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/etDateEnd"
         app:layout_constraintEnd_toEndOf="@+id/etDateEnd"
         app:layout_constraintStart_toStartOf="@+id/etDateEnd"
-        app:layout_constraintTop_toBottomOf="@+id/etDateStart"
+        app:layout_constraintTop_toBottomOf="@+id/etStepGoal"
         app:layout_constraintVertical_bias="0.5" />
 
     <EditText
@@ -75,40 +76,23 @@
         android:focusable="false"
         android:hint="@string/task_date_end"
         android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/etTimeEnd"
-        app:layout_constraintEnd_toEndOf="@+id/etTimeEnd"
-        app:layout_constraintStart_toStartOf="@+id/etTimeEnd"
-        app:layout_constraintTop_toBottomOf="@+id/etTimeStart"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <EditText
-        android:id="@+id/etTimeEnd"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:autofillHints="time"
-        android:ems="10"
-        android:focusable="false"
-        android:hint="@string/task_time_end"
-        android:inputType="time"
         app:layout_constraintBottom_toTopOf="@+id/etGroup"
-        app:layout_constraintEnd_toEndOf="@+id/etGroup"
-        app:layout_constraintStart_toStartOf="@+id/etGroup"
-        app:layout_constraintTop_toBottomOf="@+id/etDateEnd"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/etStepLengthMinutes"
+        tools:layout_editor_absoluteX="56dp" />
 
     <EditText
         android:id="@+id/etGroup"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_marginBottom="56dp"
         android:autofillHints="taskGroup"
         android:ems="10"
         android:hint="@string/task_group"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/btSave"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTimeEnd"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintEnd_toEndOf="@+id/etDateEnd"
+        app:layout_constraintHorizontal_bias="0.254"
+        app:layout_constraintStart_toStartOf="@+id/etDateEnd" />
 
     <Button
         android:id="@+id/btSave"
