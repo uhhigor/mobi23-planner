@@ -46,6 +46,8 @@ public class EditTaskActivity extends AppCompatActivity {
         }
 
         btSave.setOnClickListener(v -> {
+            if(!validateInput())
+                return;
             Task newTask = new Task(
                     etTitle.getText().toString(),
                     etDescription.getText().toString(),
@@ -76,5 +78,34 @@ public class EditTaskActivity extends AppCompatActivity {
                 year, month, day);
 
         datePickerDialog.show();
+    }
+
+    private boolean validateInput() {
+        boolean valid = true;
+        if (etTitle.getText().toString().isEmpty()) {
+            etTitle.setError("Title cannot be empty");
+            valid = false;
+        }
+        if (etDescription.getText().toString().isEmpty()) {
+            etDescription.setError("Description cannot be empty");
+            valid = false;
+        }
+        if (etStepGoal.getText().toString().isEmpty()) {
+            etStepGoal.setError("Step goal cannot be empty");
+            valid = false;
+        }
+        if (etDateEnd.getText().toString().isEmpty()) {
+            etDateEnd.setError("Date end cannot be empty");
+            valid = false;
+        }
+        if (etStepLengthMinutes.getText().toString().isEmpty()) {
+            etStepLengthMinutes.setError("Step length cannot be empty");
+            valid = false;
+        }
+        if (etGroup.getText().toString().isEmpty()) {
+            etGroup.setError("Group cannot be empty");
+            valid = false;
+        }
+        return valid;
     }
 }
