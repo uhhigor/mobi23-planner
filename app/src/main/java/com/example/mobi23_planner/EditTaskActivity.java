@@ -130,10 +130,6 @@ public class EditTaskActivity extends AppCompatActivity {
             etDateEnd.setError("Date end cannot be empty");
             valid = false;
         }
-        else if (etDateEnd.getText().toString().length() != 10) {
-            etDateEnd.setError("Date end must be in format dd-MM-yyyy");
-            valid = false;
-        }
 
         // Step length minutes
         if (etStepLengthMinutes.getText().toString().isEmpty()) {
