@@ -38,7 +38,8 @@
                 android:id="@+id/sSpinner"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
-                android:background="@color/light_blue" />
+                android:background="@color/light_blue"
+                android:contentDescription="@string/group_filter_list"/>
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -53,7 +54,9 @@
                     android:visibility="visible"
                     tools:itemCount="10"
                     tools:listitem="@layout/task_list_item"
-                    tools:visibility="visible">
+                    tools:visibility="visible"
+
+                    android:contentDescription="@string/list_with_tasks">
 
 
                 </androidx.recyclerview.widget.RecyclerView>

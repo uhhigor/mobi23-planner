@@ -7,4 +7,5 @@
     android:padding="10dp"
     android:textColor="@color/black"
     android:textSize="20sp"
-    tools:text="@tools:sample/full_names" />
+    tools:text="@tools:sample/full_names"
+    />
