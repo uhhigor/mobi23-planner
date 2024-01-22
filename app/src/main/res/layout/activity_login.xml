@@ -9,14 +9,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="LoginActivity">
+    tools:context="LoginActivity"
+    android:background="@drawable/background">
 
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="196dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="32dp"
         android:autofillHints="emailAddress"
         android:hint="@string/prompt_email"
@@ -24,8 +25,9 @@
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/motivationTextLogin" />
 
     <Button
         android:id="@+id/btLogin"
@@ -61,5 +63,19 @@
         android:selectAllOnFocus="true"
         app:layout_constraintStart_toStartOf="@+id/etEmail"
         app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+
+    <TextView
+        android:id="@+id/motivationTextLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/borel"
+        android:gravity="center"
+        android:text="@string/motivation_login"
+        android:textSize="15sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

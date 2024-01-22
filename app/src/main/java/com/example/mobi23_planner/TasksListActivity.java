@@ -41,7 +41,7 @@ public class TasksListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            startActivity(new Intent(TasksListActivity.this, LoginActivity.class));
+            startActivity(new Intent(TasksListActivity.this, MainPageActivity.class));
             finish();
             return;
         }
@@ -186,7 +186,7 @@ public class TasksListActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.action_logout) {
             FirebaseAuth.getInstance().signOut();
             DataManager.resetInstance();
-            startActivity(new Intent(TasksListActivity.this, LoginActivity.class));
+            startActivity(new Intent(TasksListActivity.this, MainPageActivity.class));
             finish();
             return true;
         } else {
