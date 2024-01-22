@@ -56,6 +56,9 @@
         android:ems="10"
         android:hint="@string/task_title_hint"
         android:inputType="text"
+        android:maxEms="20"
+        android:maxLength="20"
+        android:maxLines="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,6 +72,9 @@
         android:gravity="start|top"
         android:hint="@string/task_description_hint"
         android:inputType="textMultiLine"
+        android:maxEms="50"
+        android:maxLength="50"
+        android:maxLines="3"
         android:singleLine="true"
         app:layout_constraintStart_toStartOf="@+id/etTitle"
         app:layout_constraintTop_toBottomOf="@+id/etTitle" />
@@ -82,6 +88,8 @@
         android:ems="10"
         android:hint="@string/step_goal_hint"
         android:inputType="number|numberDecimal"
+        android:maxLength="3"
+        android:maxLines="1"
         app:layout_constraintStart_toStartOf="@+id/etDescription"
         app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
@@ -94,6 +102,8 @@
         android:ems="10"
         android:hint="@string/step_length_hint"
         android:inputType="number|numberDecimal"
+        android:maxLength="3"
+        android:maxLines="1"
         app:layout_constraintStart_toEndOf="@+id/etStepGoal"
         app:layout_constraintTop_toTopOf="@+id/etStepGoal" />
 
@@ -119,6 +129,8 @@
         android:ems="10"
         android:hint="@string/task_group_hint"
         android:inputType="text"
+        android:maxLength="10"
+        android:maxLines="1"
         app:layout_constraintStart_toStartOf="@+id/etDateEnd"
         app:layout_constraintTop_toBottomOf="@+id/etDateEnd" />
 
