@@ -37,5 +37,8 @@
     <string name="logo">Logo</string>
     <string name="addtaskbutton">addTaskButton</string>
     <string name="menubutton">menuButton</string>
+    <string name="task_list">Task List</string>
+    <string name="app_settings">App Settings</string>
+    <string name="user_settings">User Settings</string>
 
 </resources>
