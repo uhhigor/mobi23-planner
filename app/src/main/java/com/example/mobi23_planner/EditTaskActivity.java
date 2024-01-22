@@ -2,11 +2,14 @@ package com.example.mobi23_planner;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mobi23_planner.data.DataManager;
 import com.example.mobi23_planner.data.Task;
 
 import java.util.Calendar;
@@ -14,7 +17,9 @@ import java.util.Locale;
 
 public class EditTaskActivity extends AppCompatActivity {
 
-    EditText etTitle, etDescription, etDateEnd, etStepGoal, etStepLengthMinutes, etGroup;
+    EditText etTitle, etDescription, etDateEnd, etStepGoal, etStepLengthMinutes;
+
+    AutoCompleteTextView etGroup;
     Button btSave;
     Button btCancel;
 
@@ -34,6 +39,8 @@ public class EditTaskActivity extends AppCompatActivity {
         btSave = findViewById(R.id.btSave);
         btCancel = findViewById(R.id.btCancel);
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, DataManager.getInstance().getGroups());
+        etGroup.setAdapter(adapter);
         Task oldTask = (Task) getIntent().getSerializableExtra("oldTask");
 
         if(oldTask != null) {
