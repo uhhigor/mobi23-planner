@@ -88,8 +88,12 @@ public class DataManager {
     }
 
     public List<Task> getTasks() {
+        TaskComparator taskComparator = new TaskComparator();
+        tasksList.sort(taskComparator);
         return tasksList;
     }
+
+
 
     public List<String> getGroups() {
         return groupsList;

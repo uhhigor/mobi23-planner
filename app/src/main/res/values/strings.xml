@@ -26,12 +26,12 @@
 
     <string name="task_title">Task title</string>
     <string name="task_description">Task description</string>
-    <string name="task_date_start">Task date start</string>
-    <string name="task_time_start">Task time start</string>
+    <string name="step_goal">Step goal</string>
+    <string name="step_length">Step length</string>
     <string name="task_date_end">Task date end</string>
-    <string name="task_time_end">Task time end</string>
     <string name="task_group">Task group</string>
     <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
     <string name="todo">TODO</string>
     <string name="task_image">Task image</string>
     <string name="logo">Logo</string>
@@ -45,5 +45,13 @@
     <string name="confirm_new_email">Confirm New Email</string>
     <string name="current_password">Current Password</string>
     <string name="change_email">Change Email</string>
-
+    <string name="increase_steps_button_description">Increase steps for task</string>
+    <string name="task_title_hint">Title</string>
+    <string name="task_description_hint">Description</string>
+    <string name="step_goal_hint">Step goal</string>
+    <string name="step_length_hint">Step length</string>
+    <string name="task_date_end_hint">Date end</string>
+    <string name="task_group_hint">Group</string>
+    <string name="list_with_tasks">Tasks list</string>
+    <string name="group_filter_list">Group filter list</string>
 </resources>

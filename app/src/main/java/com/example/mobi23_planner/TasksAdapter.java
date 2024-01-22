@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +16,13 @@ import com.example.mobi23_planner.data.DataManager;
 import com.example.mobi23_planner.data.DataManagerListener;
 import com.example.mobi23_planner.data.Task;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> implements DataManagerListener {
     private List<Task> taskList;
@@ -47,8 +53,44 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         else
             holder.itemView.setBackgroundColor(Color.parseColor("#F2F2F2"));
 
-        CheckBox cbTaskDone = holder.cbTaskDone;
-        cbTaskDone.setChecked(task.isDone());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+        int currentMonth = calendar.get(Calendar.MONTH);
+        int currentYear = calendar.get(Calendar.YEAR);
+        boolean deadlineMissed = false;
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        String dateEnd = task.getDateEnd();
+        try {
+            Date date = format.parse(dateEnd);
+            if (date != null) {
+                calendar.setTime(date);
+
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+
+                if (year < currentYear) {
+                    deadlineMissed = true;
+                } else if (year == currentYear) {
+                    if (month < currentMonth) {
+                        deadlineMissed = true;
+                    } else if (month == currentMonth) {
+                        if (day <= currentDay) {
+                            deadlineMissed = true;
+                        }
+                    }
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (deadlineMissed) {
+            holder.itemView.setBackgroundColor(Color.parseColor("#FFCDD2"));
+        }
 
         TextView nameTextView = holder.tvName;
         nameTextView.setText(task.getTitle());
@@ -56,22 +98,22 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         TextView descriptionTextView = holder.tvDescription;
         descriptionTextView.setText(task.getDescription());
 
-        TextView dateStartTextView = holder.tvDateStart;
-        dateStartTextView.setText(task.getDateStart());
-
         TextView dateEndTextView = holder.tvDateEnd;
         dateEndTextView.setText(task.getDateEnd());
 
-        TextView timeStartTextView = holder.tvTimeStart;
-        timeStartTextView.setText(task.getTimeStart());
+        ImageButton btTaskAction = holder.btTaskAction;
 
-        TextView timeEndTextView = holder.tvTimeEnd;
-        timeEndTextView.setText(task.getTimeEnd());
+        TextView tvTime = holder.tvTime;
+        int currentTime = task.getStepLengthMinutes() * task.getStepsDone();
+        int totalTime = task.getStepLengthMinutes() * task.getStepGoal();
+        tvTime.setText(currentTime + "/" + totalTime + " min");
 
-        cbTaskDone.setOnClickListener(v -> {
-            task.setDone(cbTaskDone.isChecked());
-            DataManager.getInstance().updateTask(task.getId(), task);
-        });
+        if (task.isDone()) {
+            btTaskAction.setImageResource(R.drawable.ic_task_done);
+            holder.itemView.setBackgroundColor(Color.parseColor("#C8E6C9"));
+        } else {
+            btTaskAction.setImageResource(R.drawable.ic_task_increment);
+        }
     }
 
     @Override
@@ -93,23 +135,26 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public CheckBox cbTaskDone;
         public TextView tvName;
         public TextView tvDescription;
-        public TextView tvDateStart;
         public TextView tvDateEnd;
-        public TextView tvTimeStart;
-        public TextView tvTimeEnd;
 
+        public ImageButton btTaskAction;
+
+        public TextView tvTime;
         public ViewHolder(View itemView) {
             super(itemView);
-            cbTaskDone = itemView.findViewById(R.id.cbTaskDone);
             tvName = itemView.findViewById(R.id.tvName);
             tvDescription = itemView.findViewById(R.id.tvDescription);
-            tvDateStart = itemView.findViewById(R.id.tvDateStart);
             tvDateEnd = itemView.findViewById(R.id.tvDateEnd);
-            tvTimeStart = itemView.findViewById(R.id.tvTimeStart);
-            tvTimeEnd = itemView.findViewById(R.id.tvTimeEnd);
+            btTaskAction = itemView.findViewById(R.id.btTaskAction);
+            tvTime = itemView.findViewById(R.id.tvTime);
+
+            btTaskAction.setOnClickListener(v -> {
+                Task task = DataManager.getInstance().getTasks().get(getAdapterPosition());
+                task.taskAction();
+                DataManager.getInstance().updateTask(task.getId(), task);
+            });
         }
     }
 }
