@@ -61,4 +61,13 @@
     <string name="rise_and_shine_nyour_to_dos_are_waiting_for_their_superhero_you">Rise and shine!\nYour to-dos are waiting for their superhero – You!</string>
     <string name="motivation_login">Your to-dos believe in you. Time to show them who\'s the boss!</string>
     <string name="motivation_text_register">Time to make your to-do list smile! Add tasks and let the productivity party begin!</string>
+    <string name="x">x</string>
+    <string name="min">min.</string>
+    <string name="current_password_hint">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_background_color">Change background color</string>
+    <string name="change_font_color">Change font color</string>
+    <string name="change_font_size">Change font size</string>
 </resources>
