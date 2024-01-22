@@ -29,14 +29,19 @@
     <string name="step_goal">Step goal</string>
     <string name="step_length">Step length</string>
     <string name="task_date_end">Task date end</string>
-    <string name="task_time_end">Task time end</string>
     <string name="task_group">Task group</string>
     <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
     <string name="todo">TODO</string>
     <string name="task_image">Task image</string>
     <string name="logo">Logo</string>
     <string name="addtaskbutton">addTaskButton</string>
     <string name="menubutton">menuButton</string>
     <string name="increase_steps_button_description">Increase steps for task</string>
-
+    <string name="task_title_hint">e.g. Assignment 3</string>
+    <string name="task_description_hint">e.g. Do the assignment 3 for the course</string>
+    <string name="step_goal_hint">e.g. 10</string>
+    <string name="step_length_hint">e.g. 30</string>
+    <string name="task_date_end_hint">e.g. 31/12/2024</string>
+    <string name="task_group_hint">e.g. Uni</string>
 </resources>

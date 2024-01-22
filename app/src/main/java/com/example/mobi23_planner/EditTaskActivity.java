@@ -16,6 +16,7 @@ public class EditTaskActivity extends AppCompatActivity {
 
     EditText etTitle, etDescription, etDateEnd, etStepGoal, etStepLengthMinutes, etGroup;
     Button btSave;
+    Button btCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class EditTaskActivity extends AppCompatActivity {
         etGroup = findViewById(R.id.etGroup);
 
         btSave = findViewById(R.id.btSave);
+        btCancel = findViewById(R.id.btCancel);
 
         Task oldTask = (Task) getIntent().getSerializableExtra("oldTask");
 
@@ -59,6 +61,11 @@ public class EditTaskActivity extends AppCompatActivity {
             );
             getIntent().putExtra("newTask", newTask);
             setResult(RESULT_OK, getIntent());
+            finish();
+        });
+
+        btCancel.setOnClickListener(v -> {
+            setResult(RESULT_CANCELED, getIntent());
             finish();
         });
     }
