@@ -82,28 +82,84 @@ public class EditTaskActivity extends AppCompatActivity {
 
     private boolean validateInput() {
         boolean valid = true;
+
+        // Title
         if (etTitle.getText().toString().isEmpty()) {
             etTitle.setError("Title cannot be empty");
             valid = false;
         }
+        else if (etTitle.getText().toString().length() < 3) {
+            etTitle.setError("Title must be at least 3 characters long");
+            valid = false;
+        }
+        else if (etTitle.getText().toString().length() > 20) {
+            etTitle.setError("Title cannot be longer than 20 characters");
+            valid = false;
+        }
+
+        // Description
         if (etDescription.getText().toString().isEmpty()) {
             etDescription.setError("Description cannot be empty");
             valid = false;
         }
+        else if (etDescription.getText().toString().length() < 3) {
+            etDescription.setError("Description must be at least 3 characters long");
+            valid = false;
+        }
+        else if (etDescription.getText().toString().length() > 50) {
+            etDescription.setError("Description cannot be longer than 50 characters");
+            valid = false;
+        }
+
+        // Step goal
         if (etStepGoal.getText().toString().isEmpty()) {
             etStepGoal.setError("Step goal cannot be empty");
             valid = false;
         }
+        else if (Integer.parseInt(etStepGoal.getText().toString()) < 1) {
+            etStepGoal.setError("Step goal must be at least 1");
+            valid = false;
+        }
+        else if (Integer.parseInt(etStepGoal.getText().toString()) > 100) {
+            etStepGoal.setError("Step goal cannot be greater than 100");
+            valid = false;
+        }
+
+        // Date end
         if (etDateEnd.getText().toString().isEmpty()) {
             etDateEnd.setError("Date end cannot be empty");
             valid = false;
         }
+        else if (etDateEnd.getText().toString().length() != 10) {
+            etDateEnd.setError("Date end must be in format dd-MM-yyyy");
+            valid = false;
+        }
+
+        // Step length minutes
         if (etStepLengthMinutes.getText().toString().isEmpty()) {
             etStepLengthMinutes.setError("Step length cannot be empty");
             valid = false;
         }
+        else if (Integer.parseInt(etStepLengthMinutes.getText().toString()) < 1) {
+            etStepLengthMinutes.setError("Step length must be at least 1");
+            valid = false;
+        }
+        else if (Integer.parseInt(etStepLengthMinutes.getText().toString()) > 120) {
+            etStepLengthMinutes.setError("Step length cannot be greater than 100");
+            valid = false;
+        }
+
+        // Group
         if (etGroup.getText().toString().isEmpty()) {
-            etGroup.setError("Group cannot be empty");
+            etGroup.setError("Group name cannot be empty");
+            valid = false;
+        }
+        else if (etGroup.getText().toString().length() < 3) {
+            etGroup.setError("Group name must be at least 3 characters long");
+            valid = false;
+        }
+        else if (etGroup.getText().toString().length() > 10) {
+            etGroup.setError("Group name cannot be longer than 10 characters");
             valid = false;
         }
         return valid;
