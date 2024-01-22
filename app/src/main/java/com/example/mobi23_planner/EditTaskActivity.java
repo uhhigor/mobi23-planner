@@ -43,6 +43,14 @@ public class EditTaskActivity extends AppCompatActivity {
         etGroup.setAdapter(adapter);
         Task oldTask = (Task) getIntent().getSerializableExtra("oldTask");
 
+        int stepsDone;
+        if (oldTask != null) {
+            stepsDone = oldTask.getStepsDone();
+        } else {
+            stepsDone = 0;
+        }
+
+
         if(oldTask != null) {
             etTitle.setText(oldTask.getTitle());
             etDescription.setText(oldTask.getDescription());
@@ -66,6 +74,10 @@ public class EditTaskActivity extends AppCompatActivity {
                     etGroup.getText().toString(),
                     false
             );
+            if(oldTask != null) {
+                newTask.setStepsDone(stepsDone);
+            }
+
             getIntent().putExtra("newTask", newTask);
             setResult(RESULT_OK, getIntent());
             finish();
@@ -120,8 +132,8 @@ public class EditTaskActivity extends AppCompatActivity {
             etDescription.setError("Description must be at least 3 characters long");
             valid = false;
         }
-        else if (etDescription.getText().toString().length() > 50) {
-            etDescription.setError("Description cannot be longer than 50 characters");
+        else if (etDescription.getText().toString().length() > 80) {
+            etDescription.setError("Description cannot be longer than 80 characters");
             valid = false;
         }
 

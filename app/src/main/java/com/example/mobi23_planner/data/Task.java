@@ -72,4 +72,8 @@ public class Task implements Serializable {
             incrementStepsDone();
         }
     }
+
+    public void setStepsDone(int stepsDone) {
+        this.stepsDone = stepsDone;
+    }
 }

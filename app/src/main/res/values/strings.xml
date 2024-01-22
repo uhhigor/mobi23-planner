@@ -46,12 +46,12 @@
     <string name="current_password">Current Password</string>
     <string name="change_email">Change Email</string>
     <string name="increase_steps_button_description">Increase steps for task</string>
-    <string name="task_title_hint">Title</string>
-    <string name="task_description_hint">Description</string>
-    <string name="step_goal_hint">Step goal</string>
-    <string name="step_length_hint">Step length</string>
-    <string name="task_date_end_hint">Date end</string>
-    <string name="task_group_hint">Group</string>
+    <string name="task_title_hint">e.g. Assignment 3</string>
+    <string name="task_description_hint">e.g. Do assignment 3 for the next Python class.</string>
+    <string name="step_goal_hint">5</string>
+    <string name="step_length_hint">30</string>
+    <string name="task_date_end_hint">12/09/2024</string>
+    <string name="task_group_hint">e.g. Uni</string>
     <string name="list_with_tasks">Tasks list</string>
     <string name="group_filter_list">Group filter list</string>
 </resources>
