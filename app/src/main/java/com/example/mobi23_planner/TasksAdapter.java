@@ -27,10 +27,7 @@ import java.util.Locale;
 
 public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> implements DataManagerListener {
     private List<Task> taskList;
-    Context context;
-
-    public TasksAdapter(Context context) {
-        this.context = context;
+    public TasksAdapter() {
         DataManager.getInstance().updateTasksList();
         this.taskList = DataManager.getInstance().getTasks();
         DataManager.getInstance().addListener(this);
@@ -117,8 +114,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
             holder.itemView.setBackgroundColor(Color.parseColor("#C8E6C9"));
         } else {
             btTaskAction.setImageResource(R.mipmap.increment_task_foreground);
-            Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-            vibrator.vibrate(500);
         }
     }
 

@@ -1,9 +1,11 @@
 package com.example.mobi23_planner;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -36,6 +38,7 @@ public class TasksListActivity extends AppCompatActivity {
     FloatingActionButton fabAddTask;
     Spinner spinner;
     List<Task> filteredTaskList;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class TasksListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tasks_list);
         DataManager dm = DataManager.getInstance();
 
-        TasksAdapter adapter = new TasksAdapter(this);
+        TasksAdapter adapter = new TasksAdapter();
 
 
         rvTasks = findViewById(R.id.rvTasks);
@@ -102,6 +105,8 @@ public class TasksListActivity extends AppCompatActivity {
                     ImageButton incrementButton = childView.findViewById(R.id.btTaskAction);
                     Rect rect = new Rect();
                     incrementButton.getGlobalVisibleRect(rect);
+                    Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                    vibrator.vibrate(250);
                     if (rect.contains((int) e.getRawX(), (int) e.getRawY())) {
                         // button pressed
                         return false;
