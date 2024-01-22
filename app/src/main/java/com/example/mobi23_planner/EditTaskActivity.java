@@ -120,8 +120,8 @@ public class EditTaskActivity extends AppCompatActivity {
             etDescription.setError("Description must be at least 3 characters long");
             valid = false;
         }
-        else if (etDescription.getText().toString().length() > 50) {
-            etDescription.setError("Description cannot be longer than 50 characters");
+        else if (etDescription.getText().toString().length() > 80) {
+            etDescription.setError("Description cannot be longer than 80 characters");
             valid = false;
         }
 
