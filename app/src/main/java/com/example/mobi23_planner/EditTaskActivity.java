@@ -39,9 +39,9 @@ public class EditTaskActivity extends AppCompatActivity {
         if(oldTask != null) {
             etTitle.setText(oldTask.getTitle());
             etDescription.setText(oldTask.getDescription());
-            etStepGoal.setText(oldTask.getStepGoal());
+            etStepGoal.setText(String.valueOf(oldTask.getStepGoal()));
             etDateEnd.setText(oldTask.getDateEnd());
-            etStepLengthMinutes.setText(oldTask.getStepLengthMinutes());
+            etStepLengthMinutes.setText(String.valueOf(oldTask.getStepLengthMinutes()));
             etGroup.setText(oldTask.getGroup());
 
             getIntent().putExtra("oldTaskId", oldTask.id);
