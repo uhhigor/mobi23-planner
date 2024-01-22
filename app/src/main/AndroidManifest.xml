@@ -32,6 +32,10 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="true" />
+        <activity
+                android:name=".SettingsActivity"
+                android:exported="true"
+                />
     </application>
 
 </manifest>

@@ -180,6 +180,8 @@ public class TasksListActivity extends AppCompatActivity {
             Toast.makeText(this, "Tasks list updated", Toast.LENGTH_SHORT).show();
             return true;
         } else if (item.getItemId() == R.id.action_settings) {
+            startActivity(new Intent(TasksListActivity.this, SettingsActivity.class));
+            finish();
             return true;
         } else if (item.getItemId() == R.id.action_logout) {
             FirebaseAuth.getInstance().signOut();
