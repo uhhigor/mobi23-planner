@@ -54,4 +54,5 @@
     <string name="task_group_hint">e.g. Uni</string>
     <string name="list_with_tasks">Tasks list</string>
     <string name="group_filter_list">Group filter list</string>
+    <string name="task_done">Task done</string>
 </resources>

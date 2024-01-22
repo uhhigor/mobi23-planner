@@ -3,6 +3,7 @@ package com.example.mobi23_planner;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobi23_planner.data.DataManager;
@@ -18,7 +20,6 @@ import com.example.mobi23_planner.data.Task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -26,8 +27,10 @@ import java.util.Locale;
 
 public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> implements DataManagerListener {
     private List<Task> taskList;
+    Context context;
 
-    public TasksAdapter() {
+    public TasksAdapter(Context context) {
+        this.context = context;
         DataManager.getInstance().updateTasksList();
         this.taskList = DataManager.getInstance().getTasks();
         DataManager.getInstance().addListener(this);
@@ -109,10 +112,13 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         tvTime.setText(currentTime + "/" + totalTime + " min");
 
         if (task.isDone()) {
-            btTaskAction.setImageResource(R.drawable.ic_task_done);
+            btTaskAction.setImageResource(R.mipmap.task_done_foreground);
+            btTaskAction.setContentDescription("@string/task_done");
             holder.itemView.setBackgroundColor(Color.parseColor("#C8E6C9"));
         } else {
-            btTaskAction.setImageResource(R.drawable.ic_task_increment);
+            btTaskAction.setImageResource(R.mipmap.increment_task_foreground);
+            Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(500);
         }
     }
 

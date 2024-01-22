@@ -54,7 +54,7 @@ public class TasksListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tasks_list);
         DataManager dm = DataManager.getInstance();
 
-        TasksAdapter adapter = new TasksAdapter();
+        TasksAdapter adapter = new TasksAdapter(this);
 
 
         rvTasks = findViewById(R.id.rvTasks);
