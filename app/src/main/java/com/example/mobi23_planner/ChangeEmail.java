@@ -14,18 +14,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class ChangeEmail extends Fragment {
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.new_email, container, false);
 
         EditText etCurrentEmail = view.findViewById(R.id.etCurrentEmail);
+        etCurrentEmail.setText(user.getEmail());
         EditText etCurrentPassword = view.findViewById(R.id.etCurrentPassword);
         EditText etNewEmail = view.findViewById(R.id.etNewEmail);
         EditText etConfirmNewEmail = view.findViewById(R.id.etConfirmNewEmail);
         Button btnChangeEmail = view.findViewById(R.id.btnChangeEmail);
 
         btnChangeEmail.setOnClickListener(v -> {
-            String currentEmail = etCurrentEmail.getText().toString();
+            String currentEmail = user.getEmail();
             String currentPassword = etCurrentPassword.getText().toString();
             String newEmail = etNewEmail.getText().toString();
             String confirmNewEmail = etConfirmNewEmail.getText().toString();
@@ -45,14 +47,12 @@ public class ChangeEmail extends Fragment {
             Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         AuthCredential credential = EmailAuthProvider.getCredential(currentEmail, currentPassword);
-
         if (user != null) {
             user.reauthenticate(credential)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            user.updateEmail(newEmail)
+                            user.verifyBeforeUpdateEmail(newEmail)
                                     .addOnCompleteListener(updateTask -> {
                                         if (updateTask.isSuccessful()) {
                                             Toast.makeText(requireContext(), "Email changed successfully", Toast.LENGTH_SHORT).show();
