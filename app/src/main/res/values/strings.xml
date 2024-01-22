@@ -40,5 +40,10 @@
     <string name="task_list">Task List</string>
     <string name="app_settings">App Settings</string>
     <string name="user_settings">User Settings</string>
+    <string name="current_email">Current Email</string>
+    <string name="new_email">New Email</string>
+    <string name="confirm_new_email">Confirm New Email</string>
+    <string name="current_password">Current Password</string>
+    <string name="change_email">Change Email</string>
 
 </resources>

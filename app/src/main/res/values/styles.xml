@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Point.Theme" parent="Theme.Material3.DayNight">
+        <item name="android:fontFamily">@font/point_font</item>
+    </style>
+    <style name="Nasa.Theme" parent="Theme.Material3.DayNight">
+        <item name="android:fontFamily">@font/nasa_font</item>
+    </style>
+</resources>
