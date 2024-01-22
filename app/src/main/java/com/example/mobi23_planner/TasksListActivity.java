@@ -114,7 +114,7 @@ public class TasksListActivity extends AppCompatActivity {
                     int position = rv.getChildAdapterPosition(childView);
                     Task task = dm.getTasks().get(position);
                     showContextMenu(childView, task);
-                    return true;
+                    return false;
                 }
                 return false;
             }
