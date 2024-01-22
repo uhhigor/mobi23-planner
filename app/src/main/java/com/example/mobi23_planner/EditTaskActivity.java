@@ -1,24 +1,27 @@
 package com.example.mobi23_planner;
 
-import java.util.Calendar;
-import java.util.Locale;
 import android.app.DatePickerDialog;
-
-import android.app.TimePickerDialog;
-import android.widget.TextView;
-import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mobi23_planner.data.DataManager;
 import com.example.mobi23_planner.data.Task;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 public class EditTaskActivity extends AppCompatActivity {
 
-    EditText etTitle, etDescription, etDateStart, etDateEnd, etTimeStart, etTimeEnd, etGroup;
+    EditText etTitle, etDescription, etDateEnd, etStepGoal, etStepLengthMinutes;
+
+    AutoCompleteTextView etGroup;
     Button btSave;
+    Button btCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,68 +30,51 @@ public class EditTaskActivity extends AppCompatActivity {
 
         etTitle = findViewById(R.id.etTitle);
         etDescription = findViewById(R.id.etDescription);
-        etDateStart = findViewById(R.id.etDateStart);
-        etDateStart.setOnClickListener(v -> showDatePickerDialog(etDateStart));
+        etStepGoal = findViewById(R.id.etStepGoal);
         etDateEnd = findViewById(R.id.etDateEnd);
         etDateEnd.setOnClickListener(v -> showDatePickerDialog(etDateEnd));
-        etTimeStart = findViewById(R.id.etTimeStart);
-        etTimeStart.setOnClickListener(v -> showTimePickerDialog(etTimeStart));
-        etTimeEnd = findViewById(R.id.etTimeEnd);
-        etTimeEnd.setOnClickListener(v -> showTimePickerDialog(etTimeEnd));
+        etStepLengthMinutes = findViewById(R.id.etStepLengthMinutes);
         etGroup = findViewById(R.id.etGroup);
 
         btSave = findViewById(R.id.btSave);
+        btCancel = findViewById(R.id.btCancel);
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, DataManager.getInstance().getGroups());
+        etGroup.setAdapter(adapter);
         Task oldTask = (Task) getIntent().getSerializableExtra("oldTask");
 
         if(oldTask != null) {
             etTitle.setText(oldTask.getTitle());
             etDescription.setText(oldTask.getDescription());
-            etDateStart.setText(oldTask.getDateStart());
+            etStepGoal.setText(String.valueOf(oldTask.getStepGoal()));
             etDateEnd.setText(oldTask.getDateEnd());
-            etTimeStart.setText(oldTask.getTimeStart());
-            etTimeEnd.setText(oldTask.getTimeEnd());
+            etStepLengthMinutes.setText(String.valueOf(oldTask.getStepLengthMinutes()));
             etGroup.setText(oldTask.getGroup());
 
             getIntent().putExtra("oldTaskId", oldTask.id);
         }
 
         btSave.setOnClickListener(v -> {
+            if(!validateInput())
+                return;
             Task newTask = new Task(
                     etTitle.getText().toString(),
                     etDescription.getText().toString(),
-                    etDateStart.getText().toString(),
                     etDateEnd.getText().toString(),
-                    etTimeStart.getText().toString(),
-                    etTimeEnd.getText().toString(),
+                    Integer.parseInt(etStepGoal.getText().toString()),
+                    Integer.parseInt(etStepLengthMinutes.getText().toString()),
                     etGroup.getText().toString(),
-                    10, false
+                    false
             );
-            if (!isDateValid(etDateStart, etDateEnd, etTimeStart, etTimeEnd)) {
-                return;
-            }
             getIntent().putExtra("newTask", newTask);
             setResult(RESULT_OK, getIntent());
             finish();
         });
-    }
 
-    private boolean isDateValid(TextView startDate, TextView endDate, TextView startTime, TextView endTime) {
-        if (endDate.getText().toString().compareTo(startDate.getText().toString()) < 0) {
-            endDate.setError("");
-            Toast.makeText(EditTaskActivity.this, "End date must be after start date", Toast.LENGTH_LONG).show();
-            endDate.requestFocus();
-            return false;
-        }
-        if(endDate.getText().toString().compareTo(startDate.getText().toString()) == 0) {
-            if (endTime.getText().toString().compareTo(startTime.getText().toString()) < 0) {
-                endTime.setError("");
-                Toast.makeText(EditTaskActivity.this, "End time must be after start time", Toast.LENGTH_LONG).show();
-                endTime.requestFocus();
-                return false;
-            }
-        }
-        return true;
+        btCancel.setOnClickListener(v -> {
+            setResult(RESULT_CANCELED, getIntent());
+            finish();
+        });
     }
     private void showDatePickerDialog(EditText text) {
         final Calendar c = Calendar.getInstance();
@@ -108,20 +94,84 @@ public class EditTaskActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void showTimePickerDialog(EditText text) {
-        final Calendar c = Calendar.getInstance();
+    private boolean validateInput() {
+        boolean valid = true;
 
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int minute = c.get(Calendar.MINUTE);
+        // Title
+        if (etTitle.getText().toString().isEmpty()) {
+            etTitle.setError("Title cannot be empty");
+            valid = false;
+        }
+        else if (etTitle.getText().toString().length() < 3) {
+            etTitle.setError("Title must be at least 3 characters long");
+            valid = false;
+        }
+        else if (etTitle.getText().toString().length() > 20) {
+            etTitle.setError("Title cannot be longer than 20 characters");
+            valid = false;
+        }
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog(
-                EditTaskActivity.this,
-                (view, hourOfDay, minuteOfTask) -> {
-                    String selectedTime = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minuteOfTask);
-                    text.setText(selectedTime);
-                },
-                hour, minute, true);
+        // Description
+        if (etDescription.getText().toString().isEmpty()) {
+            etDescription.setError("Description cannot be empty");
+            valid = false;
+        }
+        else if (etDescription.getText().toString().length() < 3) {
+            etDescription.setError("Description must be at least 3 characters long");
+            valid = false;
+        }
+        else if (etDescription.getText().toString().length() > 50) {
+            etDescription.setError("Description cannot be longer than 50 characters");
+            valid = false;
+        }
 
-        timePickerDialog.show();
+        // Step goal
+        if (etStepGoal.getText().toString().isEmpty()) {
+            etStepGoal.setError("Step goal cannot be empty");
+            valid = false;
+        }
+        else if (Integer.parseInt(etStepGoal.getText().toString()) < 1) {
+            etStepGoal.setError("Step goal must be at least 1");
+            valid = false;
+        }
+        else if (Integer.parseInt(etStepGoal.getText().toString()) > 100) {
+            etStepGoal.setError("Step goal cannot be greater than 100");
+            valid = false;
+        }
+
+        // Date end
+        if (etDateEnd.getText().toString().isEmpty()) {
+            etDateEnd.setError("Date end cannot be empty");
+            valid = false;
+        }
+
+        // Step length minutes
+        if (etStepLengthMinutes.getText().toString().isEmpty()) {
+            etStepLengthMinutes.setError("Step length cannot be empty");
+            valid = false;
+        }
+        else if (Integer.parseInt(etStepLengthMinutes.getText().toString()) < 1) {
+            etStepLengthMinutes.setError("Step length must be at least 1");
+            valid = false;
+        }
+        else if (Integer.parseInt(etStepLengthMinutes.getText().toString()) > 120) {
+            etStepLengthMinutes.setError("Step length cannot be greater than 100");
+            valid = false;
+        }
+
+        // Group
+        if (etGroup.getText().toString().isEmpty()) {
+            etGroup.setError("Group name cannot be empty");
+            valid = false;
+        }
+        else if (etGroup.getText().toString().length() < 3) {
+            etGroup.setError("Group name must be at least 3 characters long");
+            valid = false;
+        }
+        else if (etGroup.getText().toString().length() > 10) {
+            etGroup.setError("Group name cannot be longer than 10 characters");
+            valid = false;
+        }
+        return valid;
     }
 }

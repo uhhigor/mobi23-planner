@@ -9,15 +9,15 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.ActionBar;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -99,11 +99,11 @@ public class TasksListActivity extends AppCompatActivity {
             public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
                 View childView = rv.findChildViewUnder(e.getX(), e.getY());
                 if (e.getAction() == MotionEvent.ACTION_DOWN && childView != null) {
-                    CheckBox checkBox = childView.findViewById(R.id.cbTaskDone);
+                    ImageButton incrementButton = childView.findViewById(R.id.btTaskAction);
                     Rect rect = new Rect();
-                    checkBox.getGlobalVisibleRect(rect);
+                    incrementButton.getGlobalVisibleRect(rect);
                     if (rect.contains((int) e.getRawX(), (int) e.getRawY())) {
-                        //checkbox clicked
+                        // button pressed
                         return false;
                     }
                     int position = rv.getChildAdapterPosition(childView);
